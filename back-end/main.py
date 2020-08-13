@@ -6,4 +6,5 @@ cur = conn.cursor()
 cur.execute('DROP TABLE IF EXISTS Teachers')
 cur.execute('CREATE TABLE Teachers (Questions TEXT, Options TEXT, Answer TEXT)')
 
+cur.close()
 conn.close()
