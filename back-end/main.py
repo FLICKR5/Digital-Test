@@ -10,6 +10,8 @@ conn = sqlite3.connect('Quiz.sqlite')
 cur = conn.cursor()
 
 cur.execute('''CREATE TABLE IF NOT EXISTS Teacher
-            (Questions TEXT, Options TEXT, Answers TEXT)''')
+            (Id INTEGER PRIMARY KEY, Questions TEXT, Options TEXT, Answers TEXT)''')
+cur.execute('''CREATE TABLE IF NOT EXISTS Student
+            (Id INTEGER PRIMARY KEY, Questions TEXT, Options TEXT)''')
 
 conn.close()
