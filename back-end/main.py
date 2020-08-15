@@ -14,7 +14,7 @@ def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
                     opt1 TEXT, opt2 TEXT, opt3 TEXT, opt4 TEXT,
                     ans TEXT)''')
 
-        cur.execute('''INSERT INTO Teacher (Questions, Options_1, Options_2, Options_3, Options_4, Answers)
+        cur.execute('''INSERT INTO Teacher (ques, opt1, opt2, opt3, opt4, ans)
                     VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
         conn.commit()
