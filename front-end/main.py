@@ -4,15 +4,18 @@ import sys
 
 
 class MyWindow(QMainWindow):
+
     def __init__(self):
         super(MyWindow, self).__init__()
         self.initUI()
 
         self.setGeometry(200, 100, 880, 565)
         self.setWindowTitle("Digital Test")
+        
 
     def initUI(self):
 
+        self.qstNo = 1
         qst_label_font = QtGui.QFont()
         qst_label_font.setFamily("Nimbus Sans [urw]")
         qst_label_font.setPointSize(14)
@@ -21,7 +24,7 @@ class MyWindow(QMainWindow):
         self.qst_lable = QtWidgets.QLabel(self)
         self.qst_lable.move(0, 20)
         self.qst_lable.setFont(qst_label_font)
-        self.qst_lable.setText("Q.No")
+        self.qst_lable.setText("Q.%02d" %(self.qstNo))
 
 
         question_entry_font = QtGui.QFont()
@@ -63,6 +66,7 @@ class MyWindow(QMainWindow):
         self.done_button.setGeometry(QtCore.QRect(770, 470, 101, 41))
         self.done_button.setFont(done_button_font)
         self.done_button.setText("Done")
+        self.done_button.clicked.connect(self.done)
 
         next_button_font = QtGui.QFont()
         next_button_font.setPointSize(14)
@@ -70,6 +74,7 @@ class MyWindow(QMainWindow):
         self.next_button.setGeometry(QtCore.QRect(650, 470, 101, 41))
         self.next_button.setFont(next_button_font)
         self.next_button.setText("Next")
+        self.next_button.clicked.connect(self.next)
 
         back_button_font = QtGui.QFont()
         back_button_font.setPointSize(14)
@@ -77,12 +82,28 @@ class MyWindow(QMainWindow):
         self.back_button.setGeometry(QtCore.QRect(530, 470, 101, 41))
         self.back_button.setFont(back_button_font)
         self.back_button.setText("Back")
+        self.back_button.clicked.connect(self.back)
+        self.back_button.setEnabled(False)
 
-        # self.next_button.clicked.connect(self.clicked)
 
 
-    def clicked(self):
+    def next(self):
+        self.qstNo+=1
+        print(self.qstNo)
+        self.update()
+
+    def back(self):
+        self.qstNo-=1
+        print(self.qstNo)
+        self.update()
+
+    def done(self):
         print("Clicked")
+
+    def update(self):
+        self.qst_lable.setText("Q.%02d" %(self.qstNo))
+        self.back_button.setEnabled(True) if self.qstNo > 1 else self.back_button.setEnabled(False)
+
 
 
 def window():
