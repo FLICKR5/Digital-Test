@@ -98,12 +98,16 @@ class MyWindow(QMainWindow):
         self.update()
 
     def done(self):
-        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text():
+        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text() and (self.opt_radio_1.isChecked() or self.opt_radio_2.isChecked() or self.opt_radio_3.isChecked() or self.opt_radio_4.isChecked()):
             print(self.question_entry.toPlainText())
             print(self.opt_entry_1.text())
             print(self.opt_entry_2.text())
             print(self.opt_entry_3.text())
             print(self.opt_entry_4.text())
+            print(self.opt_radio_1.isChecked())
+            print(self.opt_radio_2.isChecked())
+            print(self.opt_radio_3.isChecked())
+            print(self.opt_radio_4.isChecked())
         else:
             print("enter full")
             QMessageBox.about(self, "Title", "Please Populate all the input section")
