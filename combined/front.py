@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 import sys
+import back
 
 
 class MyWindow(QMainWindow):
@@ -85,6 +86,7 @@ class MyWindow(QMainWindow):
         if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text() and (self.opt_radio_1.isChecked() or self.opt_radio_2.isChecked() or self.opt_radio_3.isChecked() or self.opt_radio_4.isChecked()):
             
             self.ans = 'a' if self.opt_radio_1.isChecked() else 'b' if self.opt_radio_2.isChecked() else 'c' if self.opt_radio_3.isChecked() else 'd'
+            back.Insert_Sqlite_Table(self.question_entry.toPlainText(), self.opt_entry_1.text(), self.opt_entry_2.text(), self.opt_entry_3.text(), self.opt_entry_4.text(), self.ans)
             
             print(self.question_entry.toPlainText())
             print(self.opt_entry_1.text())
@@ -117,8 +119,7 @@ class MyWindow(QMainWindow):
 
         else:
             print("enter full")
-            QMessageBox.about(
-                self, "Title", "Please Populate all the input section")
+            QMessageBox.about(self, "Title", "Please Populate all the input section")
 
     def back(self):
         self.qstNo -= 1
@@ -132,8 +133,7 @@ class MyWindow(QMainWindow):
 
     def update(self):
         self.qst_lable.setText("Q.%02d" % (self.qstNo))
-        self.back_button.setEnabled(
-            True) if self.qstNo > 1 else self.back_button.setEnabled(False)
+        self.back_button.setEnabled(True) if self.qstNo > 1 else self.back_button.setEnabled(False)
 
 
 def window():
