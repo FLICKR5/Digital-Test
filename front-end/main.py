@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
 import sys
 
 
@@ -98,11 +98,15 @@ class MyWindow(QMainWindow):
         self.update()
 
     def done(self):
-        print(self.question_entry.toPlainText())
-        print(self.opt_entry_1.text())
-        print(self.opt_entry_2.text())
-        print(self.opt_entry_3.text())
-        print(self.opt_entry_4.text())
+        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text():
+            print(self.question_entry.toPlainText())
+            print(self.opt_entry_1.text())
+            print(self.opt_entry_2.text())
+            print(self.opt_entry_3.text())
+            print(self.opt_entry_4.text())
+        else:
+            print("enter full")
+            QMessageBox.about(self, "Title", "Please Populate all the input section")
 
     def update(self):
         self.qst_lable.setText("Q.%02d" %(self.qstNo))
