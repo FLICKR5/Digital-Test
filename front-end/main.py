@@ -47,16 +47,16 @@ class MyWindow(QMainWindow):
         self.opt_radio_4.setGeometry(QtCore.QRect(30, 330, 21, 31))
 
 
-        self.opt_entry_1 = QtWidgets.QTextEdit(self)
+        self.opt_entry_1 = QtWidgets.QLineEdit(self)
         self.opt_entry_1.setGeometry(QtCore.QRect(60, 150, 441, 31))
 
-        self.opt_entry_2 = QtWidgets.QTextEdit(self)
+        self.opt_entry_2 = QtWidgets.QLineEdit(self)
         self.opt_entry_2.setGeometry(QtCore.QRect(60, 210, 441, 31))
 
-        self.opt_entry_3 = QtWidgets.QTextEdit(self)
+        self.opt_entry_3 = QtWidgets.QLineEdit(self)
         self.opt_entry_3.setGeometry(QtCore.QRect(60, 270, 441, 31))
 
-        self.opt_entry_4 = QtWidgets.QTextEdit(self)
+        self.opt_entry_4 = QtWidgets.QLineEdit(self)
         self.opt_entry_4.setGeometry(QtCore.QRect(60, 330, 441, 31))
 
 
@@ -98,7 +98,11 @@ class MyWindow(QMainWindow):
         self.update()
 
     def done(self):
-        print("Clicked")
+        print(self.question_entry.toPlainText())
+        print(self.opt_entry_1.text())
+        print(self.opt_entry_2.text())
+        print(self.opt_entry_3.text())
+        print(self.opt_entry_4.text())
 
     def update(self):
         self.qst_lable.setText("Q.%02d" %(self.qstNo))
