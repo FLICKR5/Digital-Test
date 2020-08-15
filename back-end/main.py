@@ -1,6 +1,7 @@
 import sqlite3
 
-def Insert_Sqlite_Table():
+    
+def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
     try:
         # Create Database
         conn = sqlite3.connect('Digital-Test.sqlite')
@@ -9,32 +10,15 @@ def Insert_Sqlite_Table():
         # Create Table
         cur.execute('''CREATE TABLE IF NOT EXISTS Teacher
                     (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    Questions TEXT,
-                    Options_1 TEXT, Options_2 TEXT, Options_3 TEXT, Options_4 TEXT,
-                    Answers TEXT)''')
+                    ques TEXT,
+                    opt1 TEXT, opt2 TEXT, opt3 TEXT, opt4 TEXT,
+                    ans TEXT)''')
 
-        n = 0
-        while True:
-            n += 1
+        cur.execute('''INSERT INTO Teacher (Questions, Options_1, Options_2, Options_3, Options_4, Answers)
+                    VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-            Ques = input('Enter the {} question: '.format(n))
-            Options_1 = input('Enter the {} Option: '.format(n))
-            Options_2 = input('Enter the {} Option: '.format(n + 1))
-            Options_3 = input('Enter the {} Option: '.format(n + 2))
-            Options_4 = input('Enter the {} Option: '.format(n + 3))  
-            Ans = input('Enter the correct answer: '.format(n))
+        conn.commit()
 
-
-            cur.execute('''INSERT INTO Teacher (Questions, Options_1, Options_2, Options_3, Options_4, Answers)
-                        VALUES (?, ?, ?, ?, ?, ?)''', (Ques, Options_1, Options_2, Options_3, Options_4, Ans))
-
-            conn.commit()
-
-            check = input('Do you want to continue or not (Y/N): ')
-            if check == 'Y' or check == 'y':
-                continue
-            else:
-                break
 
     except sqlite3.Error as error:
         print('Failed to insert data into sqlite table', error)
@@ -45,4 +29,14 @@ def Insert_Sqlite_Table():
 
 
 if __name__ == '__main__':
-    Insert_Sqlite_Table()
+    for i in range(0, 6):
+
+        n = 1
+        ques = input('Enter the {} question: '.format(i + 1))
+        opt1 = input('Enter the {} Option: '.format(n))
+        opt2 = input('Enter the {} Option: '.format(n + 1))
+        opt3 = input('Enter the {} Option: '.format(n + 2))
+        opt4 = input('Enter the {} Option: '.format(n + 3))  
+        ans = input('Enter the correct answer: '.format(n))
+
+        Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans)
