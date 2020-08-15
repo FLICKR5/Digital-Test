@@ -1,6 +1,6 @@
 import sqlite3
 
-def Create_Sqlite_Table():
+def Insert_Sqlite_Table():
     try:
         # Create Database
         conn = sqlite3.connect('Digital-Test.sqlite')
