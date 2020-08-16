@@ -10,7 +10,7 @@ def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
         # Create Table
         cur.execute('''CREATE TABLE IF NOT EXISTS Teacher
                     (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    Questions TEXT,
+                    Questions TEXT UNIQUE,
                     Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT,
                     Answers TEXT)''')
 
@@ -40,18 +40,11 @@ def update_sqlite_table(ques, opt1, opt2, opt3, opt4, ans, ques_no):
         cur.execute('''SELECT * FROM Teacher WHERE Ques_No = ?''', (ques_no, ))
         print("Reading single row")
 
-        try:
-            cur.fetchone()
-            cur.execute('''UPDATE Teacher SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
-                            WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_no))
+        cur.fetchone()
+        cur.execute('''UPDATE Teacher SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
+                        WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_no))
 
-            print("Total", cur.rowcount, "Records updated successfully")
-
-        except:
-            cur.execute('''INSERT INTO Teacher (Ques_No, Questions, Option_1, Option_2, Option_3, Option_4, Answer)
-                            VALUES (?, ?, ?, ?, ?, ?, ?)''', (ques_no, ques, opt1, opt2, opt3, opt4, ans))
-
-            print("Record inserted successfully into Teacher table", cur.rowcount)
+        print("Total", cur.rowcount, "Records updated successfully")
 
         conn.commit()
         cur.close()
