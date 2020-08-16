@@ -9,89 +9,117 @@ class MyWindow(QMainWindow):
         super(MyWindow, self).__init__()
         self.initUI()
 
-        self.setGeometry(200, 100, 880, 565)
+        self.setGeometry(200, 100, 1153, 600)
         self.setWindowTitle("Digital Test")
 
     def initUI(self):
 
         self.qstNo = 1
+
+        button_font = QtGui.QFont()
+        button_font.setFamily("Padauk")
+        button_font.setPointSize(18)
+        button_font.setBold(True)
+        button_font.setWeight(75)
+
+        self.phy_button = QtWidgets.QPushButton(self)
+        self.phy_button.setGeometry(QtCore.QRect(130, 20, 131, 51))
+        self.phy_button.setFont(button_font)
+        self.phy_button.setText("Physics")
+
+        self.che_button = QtWidgets.QPushButton(self)
+        self.che_button.setGeometry(QtCore.QRect(280, 20, 141, 51))
+        self.che_button.setFont(button_font)
+        self.che_button.setText("Chemestry")
+
+        self.math_button = QtWidgets.QPushButton(self)
+        self.math_button.setGeometry(QtCore.QRect(450, 20, 151, 51))
+        self.math_button.setFont(button_font)
+        self.math_button.setText("Mathematics")
+
         qst_label_font = QtGui.QFont()
-        qst_label_font.setFamily("Nimbus Sans [urw]")
+        qst_label_font.setFamily("Noto Sans CJK KR Medium")
         qst_label_font.setPointSize(14)
-        qst_label_font.setBold(True)
-        qst_label_font.setWeight(75)
+        qst_label_font.setWeight(50)
         self.qst_lable = QtWidgets.QLabel(self)
-        self.qst_lable.move(0, 20)
+        self.qst_lable.setGeometry(QtCore.QRect(10, 100, 141, 31))
         self.qst_lable.setFont(qst_label_font)
-        self.qst_lable.setText("Q.%02d" % (self.qstNo))
+        self.qst_lable.setText("Question 1.")
 
         question_entry_font = QtGui.QFont()
-        question_entry_font.setFamily("Nimbus Mono PS [UKWN]")
         question_entry_font.setPointSize(14)
-        self.question_entry = QtWidgets.QTextEdit(self)
-        self.question_entry.setGeometry(QtCore.QRect(60, 20, 801, 61))
-        self.question_entry.setFont(question_entry_font)
+        self.qst_entry = QtWidgets.QTextEdit(self)
+        self.qst_entry.setGeometry(QtCore.QRect(10, 130, 821, 70))
+        self.qst_entry.setFont(question_entry_font)
 
-        self.opt_radio_1 = QtWidgets.QRadioButton(self)
-        self.opt_radio_1.setGeometry(QtCore.QRect(30, 150, 21, 31))
-        self.opt_radio_2 = QtWidgets.QRadioButton(self)
-        self.opt_radio_2.setGeometry(QtCore.QRect(30, 210, 21, 31))
-        self.opt_radio_3 = QtWidgets.QRadioButton(self)
-        self.opt_radio_3.setGeometry(QtCore.QRect(30, 270, 21, 31))
-        self.opt_radio_4 = QtWidgets.QRadioButton(self)
-        self.opt_radio_4.setGeometry(QtCore.QRect(30, 330, 21, 31))
+        self.opt1_radio = QtWidgets.QRadioButton(self)
+        self.opt1_radio.setGeometry(QtCore.QRect(40, 240, 16, 20))
+        self.opt2_radio = QtWidgets.QRadioButton(self)
+        self.opt2_radio.setGeometry(QtCore.QRect(40, 310, 16, 20))
+        self.opt3_radio = QtWidgets.QRadioButton(self)
+        self.opt3_radio.setGeometry(QtCore.QRect(40, 380, 16, 20))
+        self.opt4_radio = QtWidgets.QRadioButton(self)
+        self.opt4_radio.setGeometry(QtCore.QRect(40, 450, 16, 20))
 
         self.option=QButtonGroup()
-        self.option.addButton(self.opt_radio_1)
-        self.option.addButton(self.opt_radio_2)
-        self.option.addButton(self.opt_radio_3)
-        self.option.addButton(self.opt_radio_4)
+        self.option.addButton(self.opt1_radio)
+        self.option.addButton(self.opt2_radio)
+        self.option.addButton(self.opt3_radio)
+        self.option.addButton(self.opt4_radio)
 
+        self.opt1_entry = QtWidgets.QLineEdit(self)
+        self.opt1_entry.setGeometry(QtCore.QRect(80, 230, 381, 41))
+        self.opt2_entry = QtWidgets.QLineEdit(self)
+        self.opt2_entry.setGeometry(QtCore.QRect(80, 300, 381, 41))
+        self.opt3_entry = QtWidgets.QLineEdit(self)
+        self.opt3_entry.setGeometry(QtCore.QRect(80, 370, 381, 41))
+        self.opt4_entry = QtWidgets.QLineEdit(self)
+        self.opt4_entry.setGeometry(QtCore.QRect(80, 440, 381, 41))
 
-        self.opt_entry_1 = QtWidgets.QLineEdit(self)
-        self.opt_entry_1.setGeometry(QtCore.QRect(60, 150, 441, 31))
-        self.opt_entry_2 = QtWidgets.QLineEdit(self)
-        self.opt_entry_2.setGeometry(QtCore.QRect(60, 210, 441, 31))
-        self.opt_entry_3 = QtWidgets.QLineEdit(self)
-        self.opt_entry_3.setGeometry(QtCore.QRect(60, 270, 441, 31))
-        self.opt_entry_4 = QtWidgets.QLineEdit(self)
-        self.opt_entry_4.setGeometry(QtCore.QRect(60, 330, 441, 31))
-
-        done_button_font = QtGui.QFont()
-        done_button_font.setPointSize(14)
+        button_font.setPointSize(16)
         self.done_button = QtWidgets.QPushButton(self)
-        self.done_button.setGeometry(QtCore.QRect(770, 470, 101, 41))
-        self.done_button.setFont(done_button_font)
+        self.done_button.setGeometry(QtCore.QRect(690, 530, 91, 41))
+        self.done_button.setFont(button_font)
         self.done_button.setText("Done")
-        self.done_button.clicked.connect(self.done)
 
-        next_button_font = QtGui.QFont()
-        next_button_font.setPointSize(14)
         self.next_button = QtWidgets.QPushButton(self)
-        self.next_button.setGeometry(QtCore.QRect(650, 470, 101, 41))
-        self.next_button.setFont(next_button_font)
-        self.next_button.setText("Next")
-        self.next_button.clicked.connect(self.next)
+        self.next_button.setGeometry(QtCore.QRect(510, 530, 161, 41))
+        self.next_button.setFont(button_font)
+        self.next_button.setText("Save and next")
 
-        back_button_font = QtGui.QFont()
-        back_button_font.setPointSize(14)
         self.back_button = QtWidgets.QPushButton(self)
-        self.back_button.setGeometry(QtCore.QRect(530, 470, 101, 41))
-        self.back_button.setFont(back_button_font)
+        self.back_button.setGeometry(QtCore.QRect(370, 530, 121, 41))
+        self.back_button.setFont(button_font)
         self.back_button.setText("Back")
-        self.back_button.clicked.connect(self.back)
-        self.back_button.setEnabled(False)
+
+
+        pallet_label_font = QtGui.QFont()
+        pallet_label_font.setPointSize(14)
+        self.pallet_label = QtWidgets.QLabel(self)
+        self.pallet_label.setGeometry(QtCore.QRect(930, 20, 201, 31))
+        self.pallet_label.setFont(pallet_label_font)
+        self.pallet_label.setText("Question Pallet")
+
+
+        self.pallet_area = QtWidgets.QScrollArea(self)
+        self.pallet_area.setGeometry(QtCore.QRect(839, 50, 311, 541))
+        self.pallet_area.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QtWidgets.QWidget()
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
+        self.pallet_area.setWidget(self.scrollAreaWidgetContents)
+        
+
 
     def next(self):
-        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text() and (self.opt_radio_1.isChecked() or self.opt_radio_2.isChecked() or self.opt_radio_3.isChecked() or self.opt_radio_4.isChecked()):
+        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text() and (self.opt1_radio.isChecked() or self.opt2_radio.isChecked() or self.opt3_radio.isChecked() or self.opt4_radio.isChecked()):
             
-            self.ans = 'a' if self.opt_radio_1.isChecked() else 'b' if self.opt_radio_2.isChecked() else 'c' if self.opt_radio_3.isChecked() else 'd'
+            self.ans = 'a' if self.opt1_radio.isChecked() else 'b' if self.opt2_radio.isChecked() else 'c' if self.opt3_radio.isChecked() else 'd'
             
             self.option.setExclusive(False)
-            self.opt_radio_1.setChecked(False)
-            self.opt_radio_2.setChecked(False)
-            self.opt_radio_3.setChecked(False)
-            self.opt_radio_4.setChecked(False)
+            self.opt1_radio.setChecked(False)
+            self.opt2_radio.setChecked(False)
+            self.opt3_radio.setChecked(False)
+            self.opt4_radio.setChecked(False)
             self.option.setExclusive(True)
 
             self.question_entry.clear()

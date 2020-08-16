@@ -17,6 +17,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(1153, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.phy_button = QtWidgets.QPushButton(self.centralwidget)
         self.phy_button.setGeometry(QtCore.QRect(130, 20, 131, 51))
         font = QtGui.QFont()
@@ -26,6 +27,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.phy_button.setFont(font)
         self.phy_button.setObjectName("phy_button")
+
         self.che_button = QtWidgets.QPushButton(self.centralwidget)
         self.che_button.setGeometry(QtCore.QRect(280, 20, 141, 51))
         font = QtGui.QFont()
@@ -35,6 +37,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.che_button.setFont(font)
         self.che_button.setObjectName("che_button")
+
         self.math_button = QtWidgets.QPushButton(self.centralwidget)
         self.math_button.setGeometry(QtCore.QRect(450, 20, 151, 51))
         font = QtGui.QFont()
@@ -44,12 +47,14 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.math_button.setFont(font)
         self.math_button.setObjectName("math_button")
+
         self.qst_entry = QtWidgets.QTextEdit(self.centralwidget)
         self.qst_entry.setGeometry(QtCore.QRect(10, 130, 821, 70))
         font = QtGui.QFont()
         font.setPointSize(14)
         self.qst_entry.setFont(font)
         self.qst_entry.setObjectName("qst_entry")
+
         self.opt1_radio = QtWidgets.QRadioButton(self.centralwidget)
         self.opt1_radio.setGeometry(QtCore.QRect(40, 240, 16, 20))
         self.opt1_radio.setText("")
@@ -66,6 +71,7 @@ class Ui_MainWindow(object):
         self.opt4_radio.setGeometry(QtCore.QRect(40, 450, 16, 20))
         self.opt4_radio.setText("")
         self.opt4_radio.setObjectName("opt4_radio")
+
         self.qst_lable = QtWidgets.QLabel(self.centralwidget)
         self.qst_lable.setGeometry(QtCore.QRect(10, 100, 141, 31))
         font = QtGui.QFont()
@@ -75,6 +81,7 @@ class Ui_MainWindow(object):
         font.setWeight(50)
         self.qst_lable.setFont(font)
         self.qst_lable.setObjectName("qst_lable")
+
         self.opt1_entry = QtWidgets.QLineEdit(self.centralwidget)
         self.opt1_entry.setGeometry(QtCore.QRect(80, 230, 381, 41))
         self.opt1_entry.setObjectName("opt1_entry")
@@ -87,12 +94,14 @@ class Ui_MainWindow(object):
         self.opt4_entry = QtWidgets.QLineEdit(self.centralwidget)
         self.opt4_entry.setGeometry(QtCore.QRect(80, 440, 381, 41))
         self.opt4_entry.setObjectName("opt4_entry")
+
         self.pallet_label = QtWidgets.QLabel(self.centralwidget)
         self.pallet_label.setGeometry(QtCore.QRect(930, 20, 201, 31))
         font = QtGui.QFont()
         font.setPointSize(12)
         self.pallet_label.setFont(font)
         self.pallet_label.setObjectName("pallet_label")
+
         self.pallet_area = QtWidgets.QScrollArea(self.centralwidget)
         self.pallet_area.setGeometry(QtCore.QRect(839, 50, 311, 511))
         self.pallet_area.setWidgetResizable(True)
@@ -101,6 +110,7 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
+        
         self.done_button = QtWidgets.QPushButton(self.centralwidget)
         self.done_button.setGeometry(QtCore.QRect(690, 510, 91, 41))
         font = QtGui.QFont()
@@ -110,6 +120,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.done_button.setFont(font)
         self.done_button.setObjectName("done_button")
+
         self.next_button = QtWidgets.QPushButton(self.centralwidget)
         self.next_button.setGeometry(QtCore.QRect(510, 510, 161, 41))
         font = QtGui.QFont()
@@ -119,6 +130,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.next_button.setFont(font)
         self.next_button.setObjectName("next_button")
+
         self.back_button = QtWidgets.QPushButton(self.centralwidget)
         self.back_button.setGeometry(QtCore.QRect(370, 510, 121, 41))
         font = QtGui.QFont()
@@ -128,6 +140,7 @@ class Ui_MainWindow(object):
         font.setWeight(75)
         self.back_button.setFont(font)
         self.back_button.setObjectName("back_button")
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1153, 20))
