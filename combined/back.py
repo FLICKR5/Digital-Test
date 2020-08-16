@@ -2,7 +2,6 @@ import sqlite3
 
 
 def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
-    print(ques, opt1, opt2, opt3, opt4, ans)
     try:
         # Create Database
         conn = sqlite3.connect('Digital-Test.sqlite')

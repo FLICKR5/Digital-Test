@@ -1,5 +1,5 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QButtonGroup
 import sys
 
 
@@ -34,25 +34,26 @@ class MyWindow(QMainWindow):
 
         self.opt_radio_1 = QtWidgets.QRadioButton(self)
         self.opt_radio_1.setGeometry(QtCore.QRect(30, 150, 21, 31))
-
         self.opt_radio_2 = QtWidgets.QRadioButton(self)
         self.opt_radio_2.setGeometry(QtCore.QRect(30, 210, 21, 31))
-
         self.opt_radio_3 = QtWidgets.QRadioButton(self)
         self.opt_radio_3.setGeometry(QtCore.QRect(30, 270, 21, 31))
-
         self.opt_radio_4 = QtWidgets.QRadioButton(self)
         self.opt_radio_4.setGeometry(QtCore.QRect(30, 330, 21, 31))
 
+        self.option=QButtonGroup()
+        self.option.addButton(self.opt_radio_1)
+        self.option.addButton(self.opt_radio_2)
+        self.option.addButton(self.opt_radio_3)
+        self.option.addButton(self.opt_radio_4)
+
+
         self.opt_entry_1 = QtWidgets.QLineEdit(self)
         self.opt_entry_1.setGeometry(QtCore.QRect(60, 150, 441, 31))
-
         self.opt_entry_2 = QtWidgets.QLineEdit(self)
         self.opt_entry_2.setGeometry(QtCore.QRect(60, 210, 441, 31))
-
         self.opt_entry_3 = QtWidgets.QLineEdit(self)
         self.opt_entry_3.setGeometry(QtCore.QRect(60, 270, 441, 31))
-
         self.opt_entry_4 = QtWidgets.QLineEdit(self)
         self.opt_entry_4.setGeometry(QtCore.QRect(60, 330, 441, 31))
 
@@ -86,24 +87,12 @@ class MyWindow(QMainWindow):
             
             self.ans = 'a' if self.opt_radio_1.isChecked() else 'b' if self.opt_radio_2.isChecked() else 'c' if self.opt_radio_3.isChecked() else 'd'
             
-            print(self.question_entry.toPlainText())
-            print(self.opt_entry_1.text())
-            print(self.opt_entry_2.text())
-            print(self.opt_entry_3.text())
-            print(self.opt_entry_4.text())
-
-
-            print(self.ans)
-
-            print(self.opt_radio_1.isChecked())
-            print(self.opt_radio_2.isChecked())
-            print(self.opt_radio_3.isChecked())
-            print(self.opt_radio_4.isChecked())
-
+            self.option.setExclusive(False)
             self.opt_radio_1.setChecked(False)
             self.opt_radio_2.setChecked(False)
             self.opt_radio_3.setChecked(False)
             self.opt_radio_4.setChecked(False)
+            self.option.setExclusive(True)
 
             self.question_entry.clear()
             self.opt_entry_1.clear()
@@ -116,7 +105,6 @@ class MyWindow(QMainWindow):
             self.update()
 
         else:
-            print("enter full")
             QMessageBox.about(
                 self, "Title", "Please Populate all the input section")
 
