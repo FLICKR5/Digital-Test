@@ -1,7 +1,7 @@
 import sqlite3
 
     
-def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
+def insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans):
     try:
         # Create Database
         conn = sqlite3.connect('Digital-Test.sqlite')
@@ -29,6 +29,35 @@ def Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans):
         if conn:
             conn.close()
             print('The SQLite connection is closed')
+
+
+def question_data_fetch(ques_no):
+    try:
+        conn = sqlite3.connect('Digital-Test.sqlite')
+        cur = conn.cursor()
+        print("Connected to SQLite")
+
+        cur.execute('''SELECT * FROM Teacher WHERE Ques_No = ?''', (ques_no))
+        
+        records = cur.fetchall()
+        print("Printind Ques_No", ques_no)
+
+        for row in records:
+            print("Question =", row[1])
+            print("Qption_1 =", row[2])
+            print("Qption_2 =", row[3])
+            print("Qption_3 =", row[4])
+            print("Qption_4 =", row[5])
+            print("Answer =", row[6])
+        
+        cur.close()
+
+    except sqlite3.Error as error:
+        print("Failed to fetch record of sqlite table", error)
+    finally:
+        if (conn):
+            conn.close()
+            print("SQLite connection is closed")
 
 
 def update_sqlite_table(ques, opt1, opt2, opt3, opt4, ans, ques_no):
@@ -76,7 +105,7 @@ def delete_row(ques_no):
     finally:
         if (conn):
             conn.close()
-            print("sqlite connection is closed")
+            print("SQLite connection is closed")
 
 
 def drop_sqlite_table():
@@ -98,16 +127,17 @@ def drop_sqlite_table():
     finally:
         if (conn):
             conn.close()
-            print("sqlite connection is closed")
+            print("SQLite connection is closed")
 
 
 if __name__ == '__main__':
     print("\n ***** Welcome Teachers ***** \n")
     print("1. Insert question")
-    print("2. Update question")
-    print("3. Delete question")
-    print("4. Delete data")
-    print("5. Exit \n")
+    print("2. Fetch Data")
+    print("3. Update question")
+    print("4. Delete question")
+    print("5. Delete data")
+    print("6. Exit \n")
     
     val = input("Select your choice: ")
 
@@ -121,10 +151,15 @@ if __name__ == '__main__':
             opt4 = input('Enter the {} Option: '.format(4))  
             ans = input('Enter the correct answer: ')
 
-            Insert_Sqlite_Table(ques, opt1, opt2, opt3, opt4, ans)
+            insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans)
 
     if val == '2':
-        ques_no = input('Enter the question number: ')
+        ques_no = input('Enter question number: ')
+
+        question_data_fetch(ques_no)
+
+    if val == '3':
+        ques_no = input('Enter question number: ')
         
         ques = input('Enter the {} question: '.format(ques_no))
         opt1 = input('Enter the {} Option: '.format(1))
@@ -135,13 +170,13 @@ if __name__ == '__main__':
 
         update_sqlite_table(ques, opt1, opt2, opt3, opt4, ans, ques_no)
 
-    if val == '3':
+    if val == '4':
         ques_no = input('Enter the row number which you want to delete: ')
         delete_row(ques_no)
 
-    if val == '4':
+    if val == '5':
         drop_sqlite_table()
 
-    if val == '5':
+    if val == '6':
         print('Thanks for vising here')
         quit()
