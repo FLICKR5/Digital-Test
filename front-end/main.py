@@ -9,7 +9,7 @@ class MyWindow(QMainWindow):
         super(MyWindow, self).__init__()
         self.initUI()
 
-        self.setGeometry(200, 100, 1153, 600)
+        self.setGeometry(100, 100, 1153, 600)
         self.setWindowTitle("Digital Test")
 
     def initUI(self):
@@ -44,10 +44,10 @@ class MyWindow(QMainWindow):
         self.qst_lable = QtWidgets.QLabel(self)
         self.qst_lable.setGeometry(QtCore.QRect(10, 100, 141, 31))
         self.qst_lable.setFont(qst_label_font)
-        self.qst_lable.setText("Question 1.")
+        self.qst_lable.setText("Question 01")
 
         question_entry_font = QtGui.QFont()
-        question_entry_font.setPointSize(14)
+        question_entry_font.setPointSize(16)
         self.qst_entry = QtWidgets.QTextEdit(self)
         self.qst_entry.setGeometry(QtCore.QRect(10, 130, 821, 70))
         self.qst_entry.setFont(question_entry_font)
@@ -67,30 +67,39 @@ class MyWindow(QMainWindow):
         self.option.addButton(self.opt3_radio)
         self.option.addButton(self.opt4_radio)
 
+        opt_entry_font = QtGui.QFont()
+        opt_entry_font.setPointSize(14)
         self.opt1_entry = QtWidgets.QLineEdit(self)
         self.opt1_entry.setGeometry(QtCore.QRect(80, 230, 381, 41))
+        self.opt1_entry.setFont(opt_entry_font)
         self.opt2_entry = QtWidgets.QLineEdit(self)
         self.opt2_entry.setGeometry(QtCore.QRect(80, 300, 381, 41))
+        self.opt2_entry.setFont(opt_entry_font)
         self.opt3_entry = QtWidgets.QLineEdit(self)
         self.opt3_entry.setGeometry(QtCore.QRect(80, 370, 381, 41))
+        self.opt3_entry.setFont(opt_entry_font)
         self.opt4_entry = QtWidgets.QLineEdit(self)
         self.opt4_entry.setGeometry(QtCore.QRect(80, 440, 381, 41))
+        self.opt4_entry.setFont(opt_entry_font)
 
         button_font.setPointSize(16)
         self.done_button = QtWidgets.QPushButton(self)
         self.done_button.setGeometry(QtCore.QRect(690, 530, 91, 41))
         self.done_button.setFont(button_font)
         self.done_button.setText("Done")
+        self.done_button.clicked.connect(self.done)
 
         self.next_button = QtWidgets.QPushButton(self)
         self.next_button.setGeometry(QtCore.QRect(510, 530, 161, 41))
         self.next_button.setFont(button_font)
         self.next_button.setText("Save and next")
+        self.next_button.clicked.connect(self.next)
 
         self.back_button = QtWidgets.QPushButton(self)
         self.back_button.setGeometry(QtCore.QRect(370, 530, 121, 41))
         self.back_button.setFont(button_font)
         self.back_button.setText("Back")
+        self.back_button.clicked.connect(self.back)
 
 
         pallet_label_font = QtGui.QFont()
@@ -111,7 +120,7 @@ class MyWindow(QMainWindow):
 
 
     def next(self):
-        if self.question_entry.toPlainText() and self.opt_entry_1.text() and self.opt_entry_2.text() and self.opt_entry_3.text() and self.opt_entry_4.text() and (self.opt1_radio.isChecked() or self.opt2_radio.isChecked() or self.opt3_radio.isChecked() or self.opt4_radio.isChecked()):
+        if self.qst_entry.toPlainText() and self.opt1_entry.text() and self.opt2_entry.text() and self.opt3_entry.text() and self.opt4_entry.text() and (self.opt1_radio.isChecked() or self.opt2_radio.isChecked() or self.opt3_radio.isChecked() or self.opt4_radio.isChecked()):
             
             self.ans = 'a' if self.opt1_radio.isChecked() else 'b' if self.opt2_radio.isChecked() else 'c' if self.opt3_radio.isChecked() else 'd'
             
@@ -122,11 +131,11 @@ class MyWindow(QMainWindow):
             self.opt4_radio.setChecked(False)
             self.option.setExclusive(True)
 
-            self.question_entry.clear()
-            self.opt_entry_1.clear()
-            self.opt_entry_2.clear()
-            self.opt_entry_3.clear()
-            self.opt_entry_4.clear()
+            self.qst_entry.clear()
+            self.opt1_entry.clear()
+            self.opt2_entry.clear()
+            self.opt3_entry.clear()
+            self.opt4_entry.clear()
 
             self.qstNo += 1
             print(self.qstNo)
@@ -147,7 +156,7 @@ class MyWindow(QMainWindow):
         
 
     def update(self):
-        self.qst_lable.setText("Q.%02d" % (self.qstNo))
+        self.qst_lable.setText("Question %02d" % (self.qstNo))
         self.back_button.setEnabled(
             True) if self.qstNo > 1 else self.back_button.setEnabled(False)
 
