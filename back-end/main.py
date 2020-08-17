@@ -43,12 +43,7 @@ def question_data_fetch(ques_no):
         print("Printing Question Number", ques_no)
 
         for row in records:
-            print("Question =", row[1])
-            print("Qption_1 =", row[2])
-            print("Qption_2 =", row[3])
-            print("Qption_3 =", row[4])
-            print("Qption_4 =", row[5])
-            print("Answer =", row[6])
+            return list(row)
         
         cur.close()
 
