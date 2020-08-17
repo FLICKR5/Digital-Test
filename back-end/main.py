@@ -151,7 +151,7 @@ if __name__ == '__main__':
     if val == '2':
         ques_no = input('Enter question number: ')
 
-        question_data_fetch(ques_no)
+        fetch_data = question_data_fetch(ques_no)
 
     if val == '3':
         ques_no = input('Enter question number: ')
