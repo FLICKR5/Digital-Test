@@ -40,9 +40,9 @@ def question_data_fetch(ques_no):
         cur.execute('''SELECT * FROM Teacher WHERE Ques_No = ?''', (ques_no))
         
         records = cur.fetchall()
-        print("Printing Question Number", ques_no)
 
         for row in records:
+            print('Question Number {} is Fetched'.format(ques_no))
             return list(row)
         
         cur.close()
