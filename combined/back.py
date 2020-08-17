@@ -147,7 +147,6 @@ if __name__ == '__main__':
             ans = input('Enter the correct answer: ')
 
             insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans)
-
     if val == '2':
         ques_no = input('Enter question number: ')
 
