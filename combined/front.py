@@ -1,8 +1,23 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QButtonGroup
+from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QButtonGroup, QPushButton
 import sys
 import back
 
+class button(QPushButton):
+    def __init__(self, win, num):
+        super(button, self).__init__(win)
+        self.clicked.connect(self.call)
+        self.number=num
+        self.setText(str(self.number))
+        button_font = QtGui.QFont()
+        button_font.setPointSize(16)
+        self.setFont(button_font)
+    
+        self.show()
+    def call(self):
+        print(self.number)
+
+    
 
 class MyWindow(QMainWindow):
 
@@ -23,6 +38,10 @@ class MyWindow(QMainWindow):
         self.opt4=""
         self.ans=""
         self.qstNo = 1
+        self.button_list=[]
+        self.button_no=1
+        self.row = 1
+        self.coul = 1 
 
         button_font = QtGui.QFont()
         button_font.setFamily("Padauk")
@@ -129,6 +148,10 @@ class MyWindow(QMainWindow):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
         
+        self.button_list.append(button(self, self.qstNo))
+        self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+        self.coul+=1
+
         self.update()
 
 
@@ -141,7 +164,8 @@ class MyWindow(QMainWindow):
             self.opt3 = self.opt3_entry.text()
             self.opt4 = self.opt4_entry.text()
             self.ans = 'a' if self.opt1_radio.isChecked() else 'b' if self.opt2_radio.isChecked() else 'c' if self.opt3_radio.isChecked() else 'd'
-            back.Insert_Sqlite_Table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans)
+            
+            back.insert_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans)
             
             self.option.setExclusive(False)
             self.opt1_radio.setChecked(False)
@@ -157,8 +181,14 @@ class MyWindow(QMainWindow):
             self.opt4_entry.clear()
 
             self.qstNo += 1
-            print(self.qstNo)
             self.update()
+
+            self.button_list.append(button(self, self.qstNo))
+            self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+            self.coul+=1
+            if self.qstNo % 7==0:
+                self.row+=1
+                self.coul = 1 
 
         else:
             print("enter full")
