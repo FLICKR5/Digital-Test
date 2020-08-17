@@ -147,11 +147,11 @@ if __name__ == '__main__':
             ans = input('Enter the correct answer: ')
 
             insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans)
-
     if val == '2':
         ques_no = input('Enter question number: ')
 
-        question_data_fetch(ques_no)
+        fetched = question_data_fetch(ques_no)
+        print(fetched)
 
     if val == '3':
         ques_no = input('Enter question number: ')
