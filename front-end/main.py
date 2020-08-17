@@ -117,6 +117,7 @@ class MyWindow(QMainWindow):
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
         
+        self.update()
 
 
     def next(self):
