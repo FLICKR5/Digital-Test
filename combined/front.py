@@ -178,7 +178,6 @@ class MyWindow(QMainWindow):
 
     def next(self):
         if self.qst_entry.toPlainText() and self.opt1_entry.text() and self.opt2_entry.text() and self.opt3_entry.text() and self.opt4_entry.text() and (self.opt1_radio.isChecked() or self.opt2_radio.isChecked() or self.opt3_radio.isChecked() or self.opt4_radio.isChecked()):
-            
             self.question= self.qst_entry.toPlainText()
             self.opt1 = self.opt1_entry.text()
             self.opt2 = self.opt2_entry.text()
@@ -186,7 +185,6 @@ class MyWindow(QMainWindow):
             self.opt4 = self.opt4_entry.text()
             self.ans = 'a' if self.opt1_radio.isChecked() else 'b' if self.opt2_radio.isChecked() else 'c' if self.opt3_radio.isChecked() else 'd'
             
-            back.insert_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans)
             
             self.option.setExclusive(False)
             self.opt1_radio.setChecked(False)
@@ -200,6 +198,12 @@ class MyWindow(QMainWindow):
             self.opt2_entry.clear()
             self.opt3_entry.clear()
             self.opt4_entry.clear()
+                
+            if not back.question_data_fetch(str(self.qstNo)):
+                back.insert_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans)
+            else:
+                back.update_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans, self.qstNo)
+                print("to be update")
 
             self.qstNo += 1
             self.update()
@@ -217,20 +221,6 @@ class MyWindow(QMainWindow):
 
     def back(self):
         self.qstNo -= 1
-        self.question_data = back.question_data_fetch(str(self.qstNo))
-        self.question=self.question_data[1]
-        self.opt1 = self.question_data[2]
-        self.opt2 = self.question_data[3]
-        self.opt3 = self.question_data[4]
-        self.opt4 = self.question_data[5]
-        self.ans =  self.question_data[6] 
-
-        self.qst_entry.setText(self.question)
-        self.opt1_entry.setText(self.opt1)
-        self.opt2_entry.setText(self.opt2)
-        self.opt3_entry.setText(self.opt3)
-        self.opt4_entry.setText(self.opt4)
-
         self.update()
         
 
@@ -258,6 +248,25 @@ class MyWindow(QMainWindow):
         self.opt2_entry.setText(self.opt2)
         self.opt3_entry.setText(self.opt3)
         self.opt4_entry.setText(self.opt4)
+
+        self.option.setExclusive(False)
+        self.opt1_radio.setChecked(False)
+        self.opt2_radio.setChecked(False)
+        self.opt3_radio.setChecked(False)
+        self.opt4_radio.setChecked(False)
+        self.option.setExclusive(True)
+
+        self.option.setExclusive(False)
+        if self.ans=='a':
+            self.opt1_radio.setChecked(True)
+        if self.ans=='b':
+            self.opt2_radio.setChecked(True)
+        if self.ans=='c':
+            self.opt3_radio.setChecked(True)
+        if self.ans=='d':
+            self.opt4_radio.setChecked(True)
+        self.option.setExclusive(True)
+
 
     def physics(self):
         print("Physics")
