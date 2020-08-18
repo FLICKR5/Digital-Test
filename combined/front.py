@@ -4,8 +4,9 @@ import sys
 import back
 
 class button(QPushButton):
-    def __init__(self, win, num):
-        super(button, self).__init__(win)
+    def __init__(self, interit_window, num):
+        super(button, self).__init__(interit_window)
+        self.interit_window = interit_window
         self.clicked.connect(self.call)
         self.number=num
         self.setText(str(self.number))
@@ -15,7 +16,10 @@ class button(QPushButton):
     
         self.show()
     def call(self):
-        print(self.number)
+        self.interit_window.qstNo = self.number
+        self.interit_window.qst_lable.setText("Question %02d"%self.number)
+        self.interit_window.update()
+        print(self.interit_window.qstNo)
 
     
 
@@ -159,7 +163,15 @@ class MyWindow(QMainWindow):
             self.coul+=1
             if i % 7==0:
                 self.row+=1
-                self.coul = 1 
+                self.coul = 1
+
+        self.qstNo+=1
+        self.button_list.append(button(self, self.qstNo))
+        self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+        self.coul+=1
+        if self.qstNo % 7==0:
+            self.row+=1
+            self.coul = 1 
                 
         self.update()
 
@@ -230,6 +242,22 @@ class MyWindow(QMainWindow):
         self.qst_lable.setText("Question %02d" % (self.qstNo))
         self.back_button.setEnabled(
             True) if self.qstNo > 1 else self.back_button.setEnabled(False)
+
+        self.question_data = back.question_data_fetch(str(self.qstNo)) if back.question_data_fetch(str(self.qstNo)) else ["", "", "", "", "", "", ""]
+        print(self.question_data)
+        self.question=self.question_data[1]
+        self.opt1 = self.question_data[2]
+        self.opt2 = self.question_data[3]
+        self.opt3 = self.question_data[4]
+        self.opt4 = self.question_data[5]
+        self.ans =  self.question_data[6] 
+
+
+        self.qst_entry.setText(self.question)
+        self.opt1_entry.setText(self.opt1)
+        self.opt2_entry.setText(self.opt2)
+        self.opt3_entry.setText(self.opt3)
+        self.opt4_entry.setText(self.opt4)
 
     def physics(self):
         print("Physics")
