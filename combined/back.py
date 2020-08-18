@@ -126,6 +126,14 @@ def drop_sqlite_table():
 
 
 if __name__ == '__main__':
+
+    qst_no = 1
+
+    while question_data_fetch(str(qst_no)):
+        qst_no+=1
+    
+    print(qst_no)
+
     print("\n ***** Welcome Teachers ***** \n")
     print("1. Insert question")
     print("2. Fetch Data")

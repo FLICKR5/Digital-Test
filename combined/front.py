@@ -42,6 +42,9 @@ class MyWindow(QMainWindow):
         self.button_no=1
         self.row = 1
         self.coul = 1 
+        while back.question_data_fetch(str(self.qstNo+1)):
+            self.qstNo+=1
+
 
         button_font = QtGui.QFont()
         button_font.setFamily("Padauk")
@@ -147,11 +150,17 @@ class MyWindow(QMainWindow):
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
         self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
-        
-        self.button_list.append(button(self, self.qstNo))
-        self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
-        self.coul+=1
 
+
+        for i in range(1, self.qstNo+1):
+            print(i)
+            self.button_list.append(button(self, i))
+            self.button_list[i-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+            self.coul+=1
+            if i % 7==0:
+                self.row+=1
+                self.coul = 1 
+                
         self.update()
 
 
@@ -196,7 +205,20 @@ class MyWindow(QMainWindow):
 
     def back(self):
         self.qstNo -= 1
-        print(self.qstNo)
+        self.question_data = back.question_data_fetch(str(self.qstNo))
+        self.question=self.question_data[1]
+        self.opt1 = self.question_data[2]
+        self.opt2 = self.question_data[3]
+        self.opt3 = self.question_data[4]
+        self.opt4 = self.question_data[5]
+        self.ans =  self.question_data[6] 
+
+        self.qst_entry.setText(self.question)
+        self.opt1_entry.setText(self.opt1)
+        self.opt2_entry.setText(self.opt2)
+        self.opt3_entry.setText(self.opt3)
+        self.opt4_entry.setText(self.opt4)
+
         self.update()
         
 
