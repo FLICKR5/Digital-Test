@@ -201,19 +201,22 @@ class MyWindow(QMainWindow):
                 
             if not back.question_data_fetch(str(self.qstNo)):
                 back.insert_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans)
+                self.qstNo += 1
+                self.update()
+
+                self.button_list.append(button(self, self.qstNo))
+                self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+                self.coul+=1
+                if self.qstNo % 7==0:
+                    self.row+=1
+                    self.coul = 1     
+                
             else:
                 back.update_sqlite_table(self.question, self.opt1, self.opt2, self.opt3, self.opt4, self.ans, self.qstNo)
                 print("to be update")
 
-            self.qstNo += 1
-            self.update()
-
-            self.button_list.append(button(self, self.qstNo))
-            self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
-            self.coul+=1
-            if self.qstNo % 7==0:
-                self.row+=1
-                self.coul = 1 
+                self.qstNo += 1
+                self.update()
 
         else:
             print("enter full")
