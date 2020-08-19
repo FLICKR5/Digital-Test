@@ -41,7 +41,7 @@ class MyWindow(QMainWindow):
         self.opt3=""
         self.opt4=""
         self.ans=""
-        self.qstNo = 1
+        self.qstNo = 0
         self.button_list=[]
         self.button_no=1
         self.row = 1
@@ -152,18 +152,19 @@ class MyWindow(QMainWindow):
         self.pallet_area.setGeometry(QtCore.QRect(839, 50, 311, 541))
         self.pallet_area.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect( 0, 0, 309, 509))
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
 
 
         for i in range(1, self.qstNo+1):
-            print(i)
+            # print(i)
             self.button_list.append(button(self, i))
             self.button_list[i-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
             self.coul+=1
             if i % 7==0:
                 self.row+=1
                 self.coul = 1
+            print("this ", self.qstNo)
 
         self.qstNo+=1
         self.button_list.append(button(self, self.qstNo))
