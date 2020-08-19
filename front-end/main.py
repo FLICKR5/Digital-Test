@@ -137,14 +137,8 @@ class MyWindow(QMainWindow):
         self.pallet_area.setWidget(self.scrollAreaWidgetContents)
         
         self.button_list.append(button(self, self.qstNo))
-        self.button_list[self.button_no-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+        self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
         self.coul+=1
-        if self.button_no % 7==0:
-            print("inre")
-            self.row+=1
-            self.coul = 1 
-        self.button_no+=1
-
 
         self.update()
 
@@ -168,17 +162,14 @@ class MyWindow(QMainWindow):
             self.opt4_entry.clear()
 
             self.qstNo += 1
-            print(self.qstNo)
             self.update()
 
             self.button_list.append(button(self, self.qstNo))
-            self.button_list[self.button_no-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+            self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
             self.coul+=1
-            if self.button_no % 7==0:
-                print("inre")
+            if self.qstNo % 7==0:
                 self.row+=1
                 self.coul = 1 
-            self.button_no+=1
 
         else:
             QMessageBox.about(
