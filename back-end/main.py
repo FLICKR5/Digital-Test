@@ -24,7 +24,7 @@ def insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans):
         cur.close()
 
     except sqlite3.Error as error:
-        print('Failed to insert data into sqlite table', error)
+        print('Failed to insert data into sqlite table', error) 
     finally:
         if conn:
             conn.close()
