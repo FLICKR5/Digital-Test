@@ -24,19 +24,11 @@ def physics_table():
                         Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT,
                         Answers TEXT)''')
 
-        cur.execute('''CREATE TABLE IF NOT EXISTS Physics
-                        (Single_ID INTEGER NOT NULL,
-                        Multi_ID INTEGER NOT NULL,
-                        Integral_ID INTEGER NOT NULL,
-                        FOREIGN KEY (Single_ID) REFERENCES Single_Correct (Ques_No),
-                        FOREIGN KEY (Multi_ID) REFERENCES Multi_Correct (Ques_No),
-                        FOREIGN KEY (Integral_ID) REFERENCES Integral_Correct (Ques_No))''')
-
         conn.commit()
         cur.close()
 
     except sqlite3.Error as error:
-        print('Failed to insert data _____ SQLite Table', error)
+        print('Failed to create SQLite Table', error)
     finally:
         if conn:
             conn.close()
@@ -52,11 +44,6 @@ def single_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
 
         cur.execute('''INSERT INTO Single_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
-
-        last_id = cur.lastrowid
-
-        cur.execute('''INSERT INTO Physics (Single_ID, Multi_ID, Integral_ID)
-                        VALUES (?, ?, ?)''', (last_id, last_id, last_id))
 
         print("Record inserted successfully into Single Correct table ", cur.rowcount)
 
@@ -81,11 +68,6 @@ def multi_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
         cur.execute('''INSERT INTO Multi_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        last_id = cur.lastrowid
-
-        cur.execute('''INSERT INTO Physics (Single_ID, Multi_ID, Integral_ID)
-                        VALUES (?, ?, ?)''', (last_id, last_id, last_id))
-
         print("Record inserted successfully into Multi Correct table ", cur.rowcount)
 
         conn.commit()
@@ -107,11 +89,6 @@ def integral_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
 
         cur.execute('''INSERT INTO Integral_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
-
-        last_id = cur.lastrowid
-
-        cur.execute('''INSERT INTO Physics (Single_ID, Multi_ID, Integral_ID)
-                        VALUES (?, ?, ?)''', (last_id, last_id, last_id))
 
         print("Record inserted successfully into Integral Correct table ", cur.rowcount)
 
@@ -153,7 +130,7 @@ if __name__ == '__main__':
         print("\n ***** Menu ***** \n")
         print("1. Single Correct")
         print("2. Multi Correct")
-        print("3. Integral Correct")
+        print("3. Integral Correct \n")
 
         stuff = input("Select any one of it: ")
 
