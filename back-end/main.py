@@ -1,177 +1,214 @@
 import sqlite3
 
-    
-def insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans):
+
+def physics_table():
     try:
-        # Create Database
-        conn = sqlite3.connect('Digital-Test.sqlite')
+        conn = sqlite3.connect('Teacher.sqlite')
         cur = conn.cursor()
 
-        # Create Table
-        cur.execute('''CREATE TABLE IF NOT EXISTS Teacher
-                    (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
-                    Questions TEXT UNIQUE,
-                    Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT,
-                    Answers TEXT)''')
+        cur.execute('''CREATE TABLE IF NOT EXISTS Single_Correct
+                        (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                        Questions TEXT UNIQUE,
+                        Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT, 
+                        Answers TEXT)''')
 
-        cur.execute('''INSERT INTO Teacher (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
-                    VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
+        cur.execute('''CREATE TABLE IF NOT EXISTS Multi_Correct
+                        (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                        Questions TEXT UNIQUE,
+                        Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT,
+                        Answers TEXT)''')
+
+        cur.execute('''CREATE TABLE IF NOT EXISTS Integral_Correct
+                        (Ques_No INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                        Questions TEXT UNIQUE,
+                        Option_1 TEXT, Option_2 TEXT, Option_3 TEXT, Option_4 TEXT,
+                        Answers TEXT)''')
 
         conn.commit()
-
-        print("Record inserted successfully into Teacher table", cur.rowcount)
-
         cur.close()
 
     except sqlite3.Error as error:
-        print('Failed to insert data into sqlite table', error) 
+        print('Failed to create SQLite Table', error)
     finally:
         if conn:
             conn.close()
             print('The SQLite connection is closed')
 
 
-def question_data_fetch(ques_no):
+def single_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
     try:
-        conn = sqlite3.connect('Digital-Test.sqlite')
+        physics_table()
+
+        conn = sqlite3.connect('Teacher.sqlite')
         cur = conn.cursor()
-        print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Teacher WHERE Ques_No = ?''', (ques_no))
-        
-        records = cur.fetchall()
+        cur.execute('''INSERT INTO Single_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
+                        VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        for row in records:
-            print('Question Number {} is Fetched'.format(ques_no))
-            return list(row)
-        
-        cur.close()
-
-    except sqlite3.Error as error:
-        print("Failed to fetch record of sqlite table", error)
-    finally:
-        if (conn):
-            conn.close()
-            print("SQLite connection is closed")
-
-
-def update_sqlite_table(ques, opt1, opt2, opt3, opt4, ans, ques_no):
-    try:
-        conn = sqlite3.connect('Digital-Test.sqlite')
-        cur = conn.cursor()
-        print("Connected to SQLite")
-
-        cur.execute('''SELECT * FROM Teacher WHERE Ques_No = ?''', (ques_no, ))
-        print("Reading single row")
-
-        cur.fetchone()
-        cur.execute('''UPDATE Teacher SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
-                        WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_no))
-
-        print("Total", cur.rowcount, "Records updated successfully")
+        print("Record inserted successfully into Single Correct table ", cur.rowcount)
 
         conn.commit()
         cur.close()
 
     except sqlite3.Error as error:
-        print("Failed to update multiple records of sqlite table", error)
+        print('Failed to insert data into Single Correct Table', error)
     finally:
-        if (conn):
+        if conn:
             conn.close()
-            print("The SQLite connection is closed")
+            print('The SQLite connection is closed')
 
 
-def delete_row(ques_no):
+def multi_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
     try:
-        conn = sqlite3.connect('Digital-Test.sqlite')
-        cur = conn.cursor()
-        print("Connected to SQLite")
+        physics_table()
 
-        cur.execute('''DELETE FROM Teacher WHERE Ques_No = ?''', (ques_no, ))
+        conn = sqlite3.connect('Teacher.sqlite')
+        cur = conn.cursor()
+
+        cur.execute('''INSERT INTO Multi_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
+                        VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
+
+        print("Record inserted successfully into Multi Correct table ", cur.rowcount)
 
         conn.commit()
-
-        print("Record deleted successfully")
-
         cur.close()
 
     except sqlite3.Error as error:
-        print("Failed to delete reocord from a sqlite table", error)
+        print('Failed to insert data into Multi_Correct Table', error)
     finally:
-        if (conn):
+        if conn:
             conn.close()
-            print("SQLite connection is closed")
+            print('The SQLite connection is closed')
 
-
-def drop_sqlite_table():
+def integral_insert_physics(ques, opt1, opt2, opt3, opt4, ans):
     try:
-        conn = sqlite3.connect('Digital-Test.sqlite')
-        cur = conn.cursor()
-        print("Connected to SQLite")
+        physics_table()
 
-        cur.execute('''DROP TABLE Teacher''')
+        conn = sqlite3.connect('Teacher.sqlite')
+        cur = conn.cursor()
+
+        cur.execute('''INSERT INTO Integral_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
+                        VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
+
+        print("Record inserted successfully into Integral Correct table ", cur.rowcount)
 
         conn.commit()
-
-        print("Table Dropped")
-
         cur.close()
 
     except sqlite3.Error as error:
-        print("Failed to drop table from a sqlite table", error)
+        print('Failed to insert data into Integral Correct Table', error)
     finally:
-        if (conn):
+        if conn:
             conn.close()
-            print("SQLite connection is closed")
+            print('The SQLite connection is closed')
+
+
+def fetch_physics_table(ques):
+    conn = sqlite3.connect('Teacher.sqlite')
+    cur = conn.cursor()
+
+    cur.execute('''SELECT Ques_No, Questions, Option_1, Option_2, Option_3, Option_4, Answers
+                    FROM Single_Correct, Physics
+                    WHERE Single_Correct.? = Physics.Single_ID''', (ques, ))
+
+    records = cur.fetchall()
+
+    for row in records:
+        print(list(row))
 
 
 if __name__ == '__main__':
     print("\n ***** Welcome Teachers ***** \n")
-    print("1. Insert question")
-    print("2. Fetch Data")
-    print("3. Update question")
-    print("4. Delete question")
-    print("5. Delete data")
-    print("6. Exit \n")
-    
-    val = input("Select your choice: ")
+    print("1. Physics")
+    print("2. Chemistry")
+    print("3. Mathematics")
+    print("4. Exit \n")
+
+    val = input("Select any one subject: ")
 
     if val == '1':
-        for i in range(0, 3):
-            n = 1
-            ques = input('Enter the {} question: '.format(i + 1))
-            opt1 = input('Enter the {} Option: '.format(1))
-            opt2 = input('Enter the {} Option: '.format(2))
-            opt3 = input('Enter the {} Option: '.format(3))
-            opt4 = input('Enter the {} Option: '.format(4))  
-            ans = input('Enter the correct answer: ')
+        print("\n ***** Menu ***** \n")
+        print("1. Single Correct")
+        print("2. Multi Correct")
+        print("3. Integral Correct \n")
 
-            insert_sqlite_table(ques, opt1, opt2, opt3, opt4, ans)
+        stuff = input("Select any one of it: ")
 
-    if val == '2':
-        ques_no = input('Enter question number: ')
+        if stuff == '1':
+            print("\n ***** Menu ***** \n")
+            print("1. Insert question")
+            print("2. Fetch Data")
+            print("3. Update question")
+            print("4. Delete question")
+            print("5. Delete data")
+            print("6. Exit \n")
 
-        fetch_data = question_data_fetch(ques_no)
+            choice = input("Enter your choice: ")
 
-    if val == '3':
-        ques_no = input('Enter question number: ')
-        
-        ques = input('Enter the {} question: '.format(ques_no))
-        opt1 = input('Enter the {} Option: '.format(1))
-        opt2 = input('Enter the {} Option: '.format(2))
-        opt3 = input('Enter the {} Option: '.format(3))
-        opt4 = input('Enter the {} Option: '.format(4))  
-        ans = input('Enter the correct answer: ')
+            if choice == '1':
+                for i in range(0, 4):
 
-        update_sqlite_table(ques, opt1, opt2, opt3, opt4, ans, ques_no)
+                    ques = input('Enter the {} question: '.format(i + 1))
+                    opt1 = input('Enter the {} Option: '.format(1))
+                    opt2 = input('Enter the {} Option: '.format(2))
+                    opt3 = input('Enter the {} Option: '.format(3))
+                    opt4 = input('Enter the {} Option: '.format(4))
+                    ans = input('Enter the correct answer: ')
 
-    if val == '4':
-        ques_no = input('Enter the row number which you want to delete: ')
-        delete_row(ques_no)
+                    single_insert_physics(ques, opt1, opt2, opt3, opt4, ans)
 
-    if val == '5':
-        drop_sqlite_table()
+        if stuff == '2':
+            print("\n ***** Menu ***** \n")
+            print("1. Insert question")
+            print("2. Fetch Data")
+            print("3. Update question")
+            print("4. Delete question")
+            print("5. Delete data")
+            print("6. Exit \n")
 
-    if val == '6':
-        print('Thanks for vising here')
-        quit()
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                for i in range(0, 4):
+
+                    ques = input('Enter the {} question: '.format(i + 1))
+                    opt1 = input('Enter the {} Option: '.format(1))
+                    opt2 = input('Enter the {} Option: '.format(2))
+                    opt3 = input('Enter the {} Option: '.format(3))
+                    opt4 = input('Enter the {} Option: '.format(4))
+                    ans = input('Enter the correct answer: ')
+
+                    multi_insert_physics(ques, opt1, opt2, opt3, opt4, ans)
+
+        if stuff == '3':
+            print("\n ***** Menu ***** \n")
+            print("1. Insert question")
+            print("2. Fetch Data")
+            print("3. Update question")
+            print("4. Delete question")
+            print("5. Delete data")
+            print("6. Exit \n")
+
+            choice = input("Enter your choice: ")
+
+            if choice == '1':
+                for i in range(0, 4):
+
+                    ques = input('Enter the {} question: '.format(i + 1))
+                    opt1 = input('Enter the {} Option: '.format(1))
+                    opt2 = input('Enter the {} Option: '.format(2))
+                    opt3 = input('Enter the {} Option: '.format(3))
+                    opt4 = input('Enter the {} Option: '.format(4))
+                    ans = input('Enter the correct answer: ')
+
+                    integral_insert_physics(ques, opt1, opt2, opt3, opt4, ans)
+
+        if stuff == '4':
+            print('Thanks for visiting')
+            quit()
+
+        # Right now it not working properly
+        if choice == '2':
+            ques = input('Enter the question number: ')
+
+            fetch_physics_table(ques)
