@@ -19,7 +19,6 @@ class button(QPushButton):
         self.interit_window.qstNo = self.number
         self.interit_window.qst_lable.setText("Question %02d"%self.number)
         self.interit_window.update()
-        print(self.interit_window.qstNo)
 
     
 

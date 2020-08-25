@@ -1,17 +1,17 @@
 from PyQt5 import QtWidgets, QtCore, QtGui
-from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QButtonGroup, QPushButton
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QMessageBox, 
+                            QButtonGroup, QPushButton, QWidget, QGridLayout)
 import sys
 
-class button(QPushButton):
+class Button(QPushButton):
     def __init__(self, win, num):
-        super(button, self).__init__(win)
+        super(Button, self).__init__(win)
         self.clicked.connect(self.call)
         self.number=num
         self.setText(str(self.number))
         button_font = QtGui.QFont()
         button_font.setPointSize(16)
         self.setFont(button_font)
-    
         self.show()
     def call(self):
         print(self.number)
@@ -31,7 +31,6 @@ class MyWindow(QMainWindow):
 
         self.qstNo = 1
         self.button_list=[]
-        self.button_no=1
         self.row = 1
         self.coul = 1 
 
@@ -128,17 +127,24 @@ class MyWindow(QMainWindow):
         self.pallet_label.setFont(pallet_label_font)
         self.pallet_label.setText("Question Pallet")
 
+        self.widget = QWidget()
+        grid_layout = QGridLayout()
+
 
         self.pallet_area = QtWidgets.QScrollArea(self)
         self.pallet_area.setGeometry(QtCore.QRect(839, 50, 311, 541))
         self.pallet_area.setWidgetResizable(True)
-        self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 309, 509))
-        self.pallet_area.setWidget(self.scrollAreaWidgetContents)
-        
-        self.button_list.append(button(self, self.qstNo))
-        self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
-        self.coul+=1
+        self.pallet_area.setWidget(self.widget)
+
+        button = Button(self, str(str(3*self.coul+ self.row)))
+        self.button_list.append(button)
+        button.setFixedWidth(40)
+        button.setFixedHeight(40)
+        grid_layout.addWidget(button, self.coul, self.row)
+        self.widget.setLayout(grid_layout)
+        # self.button_list.append(button(self, self.qstNo))
+        # self.button_list[self.qstNo-1].setGeometry(QtCore.QRect((self.coul*42-42)+850, (self.row*42-42)+60, 35, 35))
+        # self.coul+=1
 
         self.update()
 
