@@ -1,4 +1,10 @@
 <MyGrid>
+    question: question
+    opt1:opt1
+    opt2:opt2
+    opt3:opt3
+    opt4:opt4
+
     GridLayout:
         size:root.width, root.height
         cols:1
@@ -7,29 +13,35 @@
             Label:
                 text:"Question"
             TextInput:
+                id : question
                 multiline: False
 
             Label:
                 text:"Option 1"
             TextInput:
+                id : opt1
                 multiline: False
 
             Label:
                 text:"Option 2"
             TextInput:
+                id : opt2
                 multiline: False
 
             Label:
                 text:"Option 3"
             TextInput:
+                id : opt3
                 multiline: False
 
             Label:
                 text:"Option 4"
             TextInput:
+                id : opt4
                 multiline: False
 
             Button:
                 text:"Next"
+                on_press: root.pressed()
 
 
