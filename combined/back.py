@@ -1,7 +1,6 @@
 import sqlite3
 
 
-
 # *************************************************************************************************************
 # *********************************************** Physics Table ***********************************************
 # *************************************************************************************************************
@@ -52,7 +51,8 @@ def insert_physics_single(ques, opt1, opt2, opt3, opt4, ans):
         cur.execute('''INSERT INTO Physics_Single_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        print("Record inserted successfully into Single Correct Physics Table ", cur.rowcount)
+        print(
+            "Record inserted successfully into Single Correct Physics Table ", cur.rowcount)
 
         conn.commit()
         cur.close()
@@ -75,7 +75,8 @@ def insert_physics_multi(ques, opt1, opt2, opt3, opt4, ans):
         cur.execute('''INSERT INTO Physics_Multi_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        print("Record inserted successfully into Multi Correct Physics table ", cur.rowcount)
+        print(
+            "Record inserted successfully into Multi Correct Physics table ", cur.rowcount)
 
         conn.commit()
         cur.close()
@@ -119,10 +120,10 @@ def update_physics_single(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Physics_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Physics_Single_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -146,10 +147,10 @@ def update_physics_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Physics_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Physics_Multi_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -173,10 +174,10 @@ def update_physics_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Physics_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Physics_Integral_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -201,23 +202,27 @@ def physics(stuff, data, ques, opt1, opt2, opt3, opt4, ans):
         if data == '1':
             insert_physics_single(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
-            update_physics_single(ques_value, ques, opt1, opt2, opt3, opt4, ans)
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
+            update_physics_single(ques_value, ques, opt1,
+                                  opt2, opt3, opt4, ans)
 
     elif stuff == '2':
         if data == '1':
             insert_physics_multi(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
             update_physics_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
     elif stuff == '3':
         if data == '1':
             insert_physics_integral(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
-            update_physics_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans)
-
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
+            update_physics_integral(
+                ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
 
 # ***************************************************************************************************************
@@ -293,7 +298,8 @@ def insert_chemistry_multi(ques, opt1, opt2, opt3, opt4, ans):
         cur.execute('''INSERT INTO Chemistry_Multi_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        print("Record inserted successfully into Multi Correct Chemistry table ", cur.rowcount)
+        print(
+            "Record inserted successfully into Multi Correct Chemistry table ", cur.rowcount)
 
         conn.commit()
         cur.close()
@@ -337,10 +343,10 @@ def update_chemistry_single(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Chemistry_Single_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -364,10 +370,10 @@ def update_chemistry_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Chemistry_Multi_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -391,10 +397,10 @@ def update_chemistry_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Chemistry_Integral_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -419,23 +425,28 @@ def chemistry(stuff, data, ques, opt1, opt2, opt3, opt4, ans):
         if data == '1':
             insert_chemistry_single(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
-            update_chemistry_single(ques_value, ques, opt1, opt2, opt3, opt4, ans)
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
+            update_chemistry_single(
+                ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
     elif stuff == '2':
         if data == '1':
             insert_chemistry_multi(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
-            update_chemistry_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans)
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
+            update_chemistry_multi(
+                ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
     elif stuff == '3':
         if data == '1':
             insert_chemistry_integral(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
-            update_chemistry_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans)
-
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
+            update_chemistry_integral(
+                ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
 
 # **********************************************************************************************************
@@ -534,7 +545,8 @@ def insert_math_integral(ques, opt1, opt2, opt3, opt4, ans):
         cur.execute('''INSERT INTO Math_Integral_Correct (Questions, Option_1, Option_2, Option_3, Option_4, Answers)
                         VALUES (?, ?, ?, ?, ?, ?)''', (ques, opt1, opt2, opt3, opt4, ans))
 
-        print("Record inserted successfully into Integral Correct Math table ", cur.rowcount)
+        print(
+            "Record inserted successfully into Integral Correct Math table ", cur.rowcount)
 
         conn.commit()
         cur.close()
@@ -555,10 +567,10 @@ def update_math_single(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Math_Single_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Math_Single_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -582,10 +594,10 @@ def update_math_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Math_Multi_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Math_Multi_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -609,10 +621,10 @@ def update_math_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
+        cur.execute(
+            '''SELECT * FROM Math_Integral_Correct WHERE Ques_No = ?''', (ques_value, ))
         print("Reading single row")
 
-        
         cur.fetchone()
         cur.execute('''UPDATE Math_Integral_Correct SET Questions = ?, Option_1 = ?, Option_2 = ?, Option_3 = ?, Option_4 = ?, Answers = ?
                         WHERE Ques_NO = ?''', (ques, opt1, opt2, opt3, opt4, ans, ques_value))
@@ -637,23 +649,25 @@ def math(stuff, data, ques, opt1, opt2, opt3, opt4, ans):
         if data == '1':
             insert_math_single(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
             update_math_single(ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
     elif stuff == '2':
         if data == '1':
             insert_math_multi(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
             update_math_multi(ques_value, ques, opt1, opt2, opt3, opt4, ans)
 
     elif stuff == '3':
         if data == '1':
             insert_math_integral(ques, opt1, opt2, opt3, opt4, ans)
         elif data == '3':
-            ques_value = input('\nEnter the question number where you want to update: ')
+            ques_value = input(
+                '\nEnter the question number where you want to update: ')
             update_math_integral(ques_value, ques, opt1, opt2, opt3, opt4, ans)
-
 
 
 # ********************************************************************************************************
@@ -669,7 +683,8 @@ def fetch_physics_single(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Single_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Physics_Single_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -693,7 +708,8 @@ def fetch_physics_multi(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Multi_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Physics_Multi_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -717,7 +733,8 @@ def fetch_physics_integral(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Physics_Integral_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Physics_Integral_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -743,7 +760,8 @@ def fetch_chemistry_single(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Single_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Single_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -767,7 +785,8 @@ def fetch_chemistry_multi(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Multi_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Multi_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -791,7 +810,8 @@ def fetch_chemistry_integral(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Chemistry_Integral_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Chemistry_Integral_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -817,7 +837,8 @@ def fetch_math_single(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Single_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Math_Single_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -841,7 +862,8 @@ def fetch_math_multi(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Multi_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Math_Multi_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -865,7 +887,8 @@ def fetch_math_integral(ques_value):
         cur = conn.cursor()
         print("Connected to SQLite")
 
-        cur.execute('''SELECT * FROM Math_Integral_Correct WHERE Ques_No = ?''', (ques_value))
+        cur.execute(
+            '''SELECT * FROM Math_Integral_Correct WHERE Ques_No = ?''', (ques_value))
 
         records = cur.fetchall()
 
@@ -901,7 +924,7 @@ def fetch_table(sub, stuff, ques_value):
             return fetch_chemistry_multi(ques_value)
         elif stuff == '3':
             return fetch_chemistry_integral(ques_value)
-    
+
     elif sub == '3':
         if stuff == '1':
             return fetch_math_single(ques_value)
@@ -974,7 +997,8 @@ def main_function(sub, stuff, data, ques_value, ques, opt1, opt2, opt3, opt4, an
 
     elif data == '2':
         fetch_table(sub, stuff, ques_value)
-    
+
 
 if __name__ == '__main__':
-    main_function(sub, stuff, data, ques_value, ques, opt1, opt2, opt3, opt4, ans)
+    main_function(sub, stuff, data, ques_value,
+                  ques, opt1, opt2, opt3, opt4, ans)
